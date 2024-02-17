@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class AbstractCommand
+namespace Game3C
 {
-    protected float _commandTime;
-    public float _commandTime
+    public abstract class AbstractCommand
     {
-        get { return _commandTime; }
-    }
-    public virtual void execute() { }
-    public virtual void undo() { }
+        protected float _time;
+        public float Time
+        {
+            get { return _time; }
+        }
+        public virtual void execute() { }
+        public virtual void undo() { }
 
+    }
 }
