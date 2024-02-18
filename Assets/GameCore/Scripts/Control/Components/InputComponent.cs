@@ -16,6 +16,8 @@ namespace Game3C
         public bool IsRun = true;
 
         private Vector2 move = Vector2.zero;
+        private Vector2 lastMove = Vector2.zero;
+
 
         // Use this for initialization
         void Start()
@@ -51,6 +53,7 @@ namespace Game3C
         private AbstractCommand InputHandler()
         {
 
+            lastMove = move;
             move.x = Input.GetAxis("Horizontal");
             move.y = Input.GetAxis("Vertical");
             if (Input.GetButtonDown("Jump"))
@@ -59,7 +62,8 @@ namespace Game3C
             }
             if (move == Vector2.zero)
             {
-                this.SendEvent<MoveEvent>(new MoveEvent(Vector2.zero));
+                if (lastMove != Vector2.zero)
+                    this.SendEvent<MoveEvent>(new MoveEvent(Vector2.zero));
                 return null;
             }
             return new CommandMove(move);

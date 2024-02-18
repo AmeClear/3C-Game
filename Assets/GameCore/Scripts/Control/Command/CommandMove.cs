@@ -10,6 +10,7 @@ namespace Game3C
     public class CommandMove : AbstractCommand
     {
         private Vector2 moveParams;
+        public Vector2 Move { set { moveParams = value; } }
         public CommandMove(Vector2 moveParams)
         {
             this.moveParams = moveParams;
