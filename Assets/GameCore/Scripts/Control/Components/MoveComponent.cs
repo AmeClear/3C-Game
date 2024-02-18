@@ -10,6 +10,8 @@ namespace Game3C
     public class MoveComponent : AbstractComponent
     {
         [SerializeField]
+        private float rotSpeed = 10;
+        [SerializeField]
         private Transform playerInputSpace = default;
         [SerializeField, Range(0f, 100f)]
         private float maxSpeed = 10f;
@@ -80,7 +82,7 @@ namespace Game3C
                 desiredVelocity =
                     new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
             }
-
+            RotateToMoveDir();
 
 
         }
@@ -111,7 +113,16 @@ namespace Game3C
                 playerInput.y = data.moveParams.y;
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
+        private void RotateToMoveDir()
+        {
+            if (desiredVelocity != Vector3.zero)
+            {
 
+                Quaternion rotation = Quaternion.LookRotation(desiredVelocity);
+
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, Time.deltaTime * rotSpeed);
+            }
+        }
         private void ClearState()
         {
             groundContactCount = steepContactCount = 0;
