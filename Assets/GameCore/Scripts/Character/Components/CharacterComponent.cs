@@ -5,7 +5,14 @@ namespace Game3C
 {
     public class CharacterComponent : AbstractComponent
     {
-        [HideInInspector]
+
         public List<AbstractComponent> components;
+        /// <summary>
+        /// Awake is called when the script instance is being loaded.
+        /// </summary>
+        void Awake()
+        {
+
+        }
     }
 }
