@@ -38,6 +38,7 @@ namespace Game3C
         private LayerMask probeMask = -1, stairsMask = -1;
         private Rigidbody body;
         private Vector3 velocity, desiredVelocity;
+        public Vector3 DesiredVelocity { get => desiredVelocity; }
         private bool desiredJump;
         private Vector3 contactNormal, steepNormal;
         private int groundContactCount, steepContactCount;
