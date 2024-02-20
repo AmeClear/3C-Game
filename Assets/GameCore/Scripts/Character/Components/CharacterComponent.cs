@@ -21,7 +21,7 @@ namespace Game3C
         }
         private void Update()
         {
-            animComponent.AnimSpeed = moveComponent.DesiredVelocity.magnitude;
+            animComponent.SetMoveParam(moveComponent.DesiredVelocity, moveComponent.MaxSpeed);
         }
     }
 }
