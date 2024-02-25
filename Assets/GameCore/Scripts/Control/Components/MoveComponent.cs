@@ -40,7 +40,7 @@ namespace Game3C
         private Vector3 velocity, desiredVelocity;
         public Vector3 DesiredVelocity { get => desiredVelocity; }
         public float MaxSpeed { get => maxSpeed; }
-
+        public float minMoveSpeed;
         private bool desiredJump;
         private Vector3 contactNormal, steepNormal;
         private int groundContactCount, steepContactCount;

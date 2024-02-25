@@ -794,8 +794,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.15084442, y: 0.0000000170095, z: -0.0000000025954867, w: 0.9885575}
-  m_LocalPosition: {x: 0, y: 3.27, z: -1.74}
+  m_LocalRotation: {x: 0.33462578, y: -0.024026394, z: 0.008534813, w: 0.9420061}
+  m_LocalPosition: {x: 0.09280022, y: 4.9846168, z: -3.366496}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -899,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da537a66b503d143986f20c8e5baef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSpeed: 800
+  rotSpeed: 2000
   playerInputSpace: {fileID: 963194228}
   maxSpeed: 4
   maxAcceleration: 80
@@ -916,6 +916,7 @@ MonoBehaviour:
   stairsMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  minMoveSpeed: 0
 --- !u!54 &1106805161
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -970,10 +971,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a85e043a4691cd49966ebb47b1cfa89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changeAngle: 0
-  _animSpeed: 0
-  acceleration: 0
-  animator: {fileID: 1665283061}
+  animancer: {fileID: 0}
+  idle:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400000, guid: 4f9b2cc802bffcd468bf59be5599a8d1, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  move:
+    _Asset: {fileID: 11400000, guid: aff8750cb0598bf4298efb7f63a56bae, type: 2}
 --- !u!4 &1453374393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3742407835892290726, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
@@ -1037,7 +1046,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c77c864ccfa66bb429b7b29ad7db5166, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -1049,11 +1058,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
   m_PrefabInstance: {fileID: 1665283059}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1665283061 stripped
+--- !u!1 &1665283061 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
+  m_PrefabInstance: {fileID: 1665283059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1665283062 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e8ec987e2e863694496454b5ea647c70, type: 3}
   m_PrefabInstance: {fileID: 1665283059}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665283063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665283061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad50f81b1d25c441943c37a89ba23f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Animator: {fileID: 1665283062}
+  _ActionOnDisable: 0
 --- !u!1 &1688238066
 GameObject:
   m_ObjectHideFlags: 0

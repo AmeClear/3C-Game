@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eceeb59a892d074db28203df8e4cd3a, type: 3}
+  m_Name: Turn
+  m_EditorClassIdentifier: 
+  _Up: {fileID: 0}
+  _Right: {fileID: 7400000, guid: efa9416a2799b7e45815539b57d2275a, type: 3}
+  _Down: {fileID: 0}
+  _Left: {fileID: 7400000, guid: e0a021a581bd88d45ade5c859bfb9964, type: 3}
