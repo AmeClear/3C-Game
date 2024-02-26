@@ -20,6 +20,14 @@ namespace Game3C
             {
 
             }
+            public class DashEvent
+            {
+                public bool isDash;
+                public DashEvent(bool isDash)
+                {
+                    this.isDash = isDash;
+                }
+            }
         }
     }
 }

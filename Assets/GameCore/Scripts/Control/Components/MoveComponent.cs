@@ -15,6 +15,8 @@ namespace Game3C
         private Transform playerInputSpace = default;
         [SerializeField, Range(0f, 100f)]
         private float maxSpeed = 10f;
+        [SerializeField, Range(0f, 100f)]
+        private float maxDashSpeed = 20f;
 
         [SerializeField, Range(0f, 100f)]
         private float maxAcceleration = 10f, maxAirAcceleration = 1f;
@@ -40,7 +42,8 @@ namespace Game3C
         private Vector3 velocity, desiredVelocity;
         public Vector3 DesiredVelocity { get => desiredVelocity; }
         public float MaxSpeed { get => maxSpeed; }
-        public float minMoveSpeed;
+        public float MaxDashSpeed { get => maxDashSpeed; }
+
         private bool desiredJump;
         private Vector3 contactNormal, steepNormal;
         private int groundContactCount, steepContactCount;
@@ -106,10 +109,23 @@ namespace Game3C
         }
         private void ListenEvent()
         {
+            this.RegisterEvent<DashEvent>((data) =>
+            {
+                if (data.isDash)
+                {
+                    maxSpeed = maxDashSpeed;
+                    desiredVelocity =
+                  new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+                }
+                else
+                {
+
+                }
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<JumpEvent>((data) =>
             {
                 desiredJump |= true;
-            });
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
             this.RegisterEvent<MoveEvent>((data) =>
             {
                 playerInput.x = data.moveParams.x;
@@ -125,6 +141,10 @@ namespace Game3C
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, Time.deltaTime * rotSpeed);
             }
+        }
+        private void DashMove()
+        {
+            // body.AddForce()
         }
         private void ClearState()
         {

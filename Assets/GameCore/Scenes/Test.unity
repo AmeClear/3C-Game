@@ -902,6 +902,7 @@ MonoBehaviour:
   rotSpeed: 2000
   playerInputSpace: {fileID: 963194228}
   maxSpeed: 4
+  maxDashSpeed: 20
   maxAcceleration: 80
   maxAirAcceleration: 1
   jumpHeight: 2
@@ -983,6 +984,8 @@ MonoBehaviour:
     _NormalizedStartTime: 0
   move:
     _Asset: {fileID: 11400000, guid: aff8750cb0598bf4298efb7f63a56bae, type: 2}
+  dash:
+    _Asset: {fileID: 11400000, guid: 4b831bfd1a023964386d16e20b40458b, type: 2}
 --- !u!4 &1453374393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3742407835892290726, guid: e8ec987e2e863694496454b5ea647c70, type: 3}

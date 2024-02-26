@@ -49,36 +49,90 @@ namespace Game3C
             }
         }
 
-
-        private AbstractCommand InputHandler()
+        private float dashholdTime = 0;
+        private float dashholdLimitTime = 0.2f;
+        private bool DashHold()
         {
 
+            dashholdTime += Time.deltaTime;
+            Debug.LogError(dashholdTime);
+            if (dashholdTime >= dashholdLimitTime)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+        private void MoveHandler()
+        {
             lastMove = move;
             move.x = Input.GetAxis("Horizontal");
             move.y = Input.GetAxis("Vertical");
-            if (Input.GetButtonDown("Jump"))
-            {
-                return new CommandJump();
-            }
+            AbstractCommand cmd = null;
+
             if (move == Vector2.zero)
             {
                 if (lastMove != Vector2.zero)
                     this.SendEvent<MoveEvent>(new MoveEvent(Vector2.zero));
-                return null;
             }
-            return new CommandMove(move);
-        }
-
-        private void Control()
-        {
-            mCallBackTime += Time.deltaTime;
-            AbstractCommand cmd = InputHandler();
-
+            else
+                cmd = new CommandMove(move);
             if (cmd != null)
             {
                 mCommandStack.Push(cmd);
                 cmd.execute();
             }
+        }
+        private void DashHandler()
+        {
+            AbstractCommand cmd = null;
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                if (DashHold())
+                {
+                    cmd = new CommandDash(true);
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                if (!DashHold())
+                {
+                    cmd = new CommandDash(false);
+                }
+                dashholdTime = 0;
+            }
+            if (cmd != null)
+            {
+                mCommandStack.Push(cmd);
+                cmd.execute();
+            }
+        }
+        private void KeyDownHandler()
+        {
+            AbstractCommand cmd = null;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                cmd = new CommandJump();
+            }
+            if (cmd != null)
+            {
+                mCommandStack.Push(cmd);
+                cmd.execute();
+            }
+        }
+
+
+        private void Control()
+        {
+            mCallBackTime += Time.deltaTime;
+            MoveHandler();
+            DashHandler();
+            KeyDownHandler();
+
         }
     }
 }

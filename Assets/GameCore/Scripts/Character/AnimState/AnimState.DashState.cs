@@ -6,23 +6,18 @@ namespace Game3C
 {
     public partial class AnimState
     {
-        public class MoveState : AnimState
+        public class DashState : AnimState
         {
             public override void OnEnterState()
             {
-                Anim.Animancer.Play(Anim.move);
+                Anim.Animancer.Play(Anim.dash);
             }
             public override void Update()
             {
-                Anim.move.State.Parameter = Anim.AnimParams.Speed;
+                Anim.dash.State.Parameter = Anim.AnimParams.Speed;
                 if (Anim.AnimParams.Speed < 0.1)
                 {
                     OwnerStateMachine.TrySetState(Anim.IdleState);
-                }
-                if (Anim.AnimParams.IsDashing)
-                {
-                    OwnerStateMachine.TrySetState(Anim.DashState);
-
                 }
             }
         }

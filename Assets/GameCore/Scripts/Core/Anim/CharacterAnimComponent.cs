@@ -19,14 +19,20 @@ namespace Game3C
 
         private IdleState idleState;
         private MoveState moveState;
+        private DashState dashState;
+
         public IdleState IdleState => idleState;
         public MoveState MoveState => moveState;
+        public DashState DashState => dashState;
+
 
 
         [Header("动画")]
         public ClipTransition idle;
 
         public LinearMixerTransitionAsset.UnShared move;
+        public LinearMixerTransitionAsset.UnShared dash;
+
 
 
 
@@ -44,6 +50,8 @@ namespace Game3C
 
             idleState = new IdleState();
             moveState = new MoveState();
+            dashState = new DashState();
+            dashState.Anim = this;
             idleState.Anim = this;
             moveState.Anim = this;
         }
@@ -59,41 +67,17 @@ namespace Game3C
             StateMachine.CurrentState.Update();
         }
 
-        // [SerializeField] private LinearMixerTransitionAsset.UnShared MoveMixer;
-        // [SerializeField] private MixerTransition2D _Turn;
-        // [SerializeField] private float changeAngle = 0;
-        // private Define.AnimParams animParams = new Define.AnimParams();
-
-
-
-        // private void OnEnable()
-        // {
-        //     _Animancer.Play(MoveMixer);
-        // }
-        // private void Update()
-        // {
-        // }
-
         private void SetMoveParam(Vector3 Velocity, float maxSpeed)
         {
 
             //点乘判断夹角，夹角判断转向
             if (StateMachine.CurrentState == idleState && Velocity != Vector3.zero)
                 animParams.ChangeAngle = CalcAngleByVec(transform.forward, Velocity);
-            // _lastSpeed = _animSpeed;
-            // _animSpeed = Velocity.magnitude / maxSpeed;
-            // acceleration = _animSpeed - _lastSpeed;
+            animParams.LastSpeed = animParams.Speed;
+            animParams.Acceleration = animParams.Speed - animParams.LastSpeed;
             animParams.Speed = Velocity.magnitude / maxSpeed;
-            // animParams.changeAngle = changeAngle;
-            // if (animParams.speed > 0)
-            // {
-            //     animState = AnimState.Moving;
-            // }
-            // else
-            // {
-            //     animState = AnimState.Idle;
+            animParams.IsDashing = maxSpeed == moveComponent.MaxDashSpeed;
 
-            // }
         }
         private float CalcAngleByVec(Vector3 a, Vector3 b)
         {
